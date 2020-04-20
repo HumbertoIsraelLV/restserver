@@ -14,11 +14,6 @@ app.use(bodyParser.json());
 
 
 
-app.get('/', (req, res) => {
-    res.json('Hello World');
-});
-
-
 app.get('/usuario', (req, res) => {
     res.json('get - Usuario');
 });
