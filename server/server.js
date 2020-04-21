@@ -1,44 +1,36 @@
+//heroku
+//du1llIP49P93YzPp
+
+//MONGO URL:
+//PARA CONEXION CON COMPASS
+//mongodb+srv://heroku:du1llIP49P93YzPp@cluster0-ycito.mongodb.net/cafe
+
+//PARA CONEXION CON NODE
+//mongodb+srv://heroku:du1llIP49P93YzPp@cluster0-ycito.mongodb.net/test?retryWrites=true&w=majority
+
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
-const bodyParser = require('body-parser');
 require('./config/config');
 
 
 //LOS APP.USE SON MIDDLEWARES
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-//parse application/x-www-formurlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
-//parse application json
-app.use(bodyParser.json());
+app.use(require('./routes/usuario'));
 
 
+mongoose.connect(process.env.URLDB, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    },
+    (err, res) => {
+        if (err) throw new error;
+        else console.log('Base de datos online');
 
-app.get('/usuario', (req, res) => {
-    res.json('get - Usuario');
-});
-
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    } else {
-        res.json({ persona: body });
-    }
-});
-
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-
-    res.json('id: ', id);
-});
-
-app.delete('/usuario', (req, res) => {
-    res.json('delete - Usuario');
-});
+    });
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto', process.env.PORT);
