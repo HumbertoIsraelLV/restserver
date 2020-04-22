@@ -14,12 +14,14 @@ const app = express();
 require('./config/config');
 
 
+
 //LOS APP.USE SON MIDDLEWARES
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(require('./routes/usuario'));
 
+//CONFIGURACION GLOBAL DE RUTAS
+app.use(require('./routes/index'));
 
 mongoose.connect(process.env.URLDB, {
         useNewUrlParser: true,
