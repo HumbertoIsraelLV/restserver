@@ -10,6 +10,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
 require('./config/config');
 
@@ -19,6 +20,9 @@ require('./config/config');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+//HABILITAR CARPETA PUBLIC
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 //CONFIGURACION GLOBAL DE RUTAS
 app.use(require('./routes/index'));

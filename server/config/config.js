@@ -39,3 +39,9 @@ process.env.URLDB = urlDB;
 // "engines": {
 //     "node": "13.13.0"
 // },
+
+
+///========================
+//GOOGLE CLIENT ID
+//=========================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '579261803947-ucifr3di2m3e2u12f6oc9db207c3djv4.apps.googleusercontent.com';
